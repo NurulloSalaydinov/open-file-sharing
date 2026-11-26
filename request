@@ -1,0 +1,15 @@
+import json
+import urllib.request
+import urllib.error
+
+body = json.dumps({"sender": "민수", "receiver": "지우", "amount": 5}).encode("utf-8")
+req = urllib.request.Request(
+    "http://127.0.0.1:5000/demo/transfer",
+    data=body,
+    headers={"Content-Type": "application/json"},
+    method="POST",
+)
+try:
+    print(urllib.request.urlopen(req).read().decode("utf-8"))
+except urllib.error.HTTPError as e:
+    print(e.code, e.read().decode("utf-8"))
